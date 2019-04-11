@@ -1,11 +1,12 @@
-import { ISolider } from "./ISolider";
-import { IDisplayAdapter } from "./IDisplayAdapter";
+import { ISoldier } from "./ISoldier";
 
 export interface IPlayer {
     id: number;
-    name?: string;
+    name: string;
+    soldiers: ISoldier[];
+    isReady: boolean;
+    soldierCnt: number;
 
-    displayAdapter: IDisplayAdapter;
-    
-    soliders: ISolider[];
+    addSoldiers(soldierCount: number): void;
+    generateSoldiers(soldierNames: string[]): void;
 }

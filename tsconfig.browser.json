@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "outDir": "./dist.browser",
+      "target": "ES2017",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "lib": ["es2016", "dom", "es5"]
+    },
+    "include": [
+      "./src/**/*"
+    ]
+  }

@@ -1,35 +1,56 @@
-import { ISolider } from "../interfaces/ISolider";
-import { IPlayer } from "../interfaces/IPlayer";
 import { SoldierFactoy } from "../factories/SoldierFactory";
+import { SoldierNamesService } from "../services/SoldierNamesService";
 import { IDisplayAdapter } from "../interfaces/IDisplayAdapter";
-import { DisplayControllerFactory } from "../factories/DisplayControllerFactory";
+import { IPlayer } from "../interfaces/IPlayer";
+import { ISoldier } from "../interfaces/ISoldier";
 
 export class Player implements IPlayer {
-    displayAdapter: IDisplayAdapter;
-    id: number;    
-    name: string;
-    soliders: ISolider[] = [];
 
-    constructor(id: number, soliderCount: number, name?: string) {
-        this.displayAdapter = DisplayControllerFactory.create();
-        this.id = id;
-        this.name = name ? name : this.generateName(id);
-        this.displayAdapter.playerCreated(this.name);
-        
-        this.generateSoliders(soliderCount);
+    public name: string;
+    public isReady: boolean;
+    public soldiers: ISoldier[];
+    
+    public get soldierCnt(): number {
+        return this.soldiers.length;
     }
 
-    generateName(id: number) {
+    constructor(
+        public id: number,
+        soldierCount: number,
+        private _displayAdapter: IDisplayAdapter
+    ) {
+        this.isReady = false;
+        this.soldiers = new Array<ISoldier>();
+
+        this.name = name ? name : this.generateName(id);
+        this._displayAdapter.playerCreated(this.name);
+        this.addSoldiers(soldierCount);
+    }
+
+    private generateName(id: number) {
         return `P${id}`;
     }
 
-    generateSoliders(soliderCount: number) {
-        this.soliders = new Array<ISolider>();
+    // generate new soldier names and add soldiers
+    addSoldiers(soldierCount: number): void {
+        this.isReady = false;
+        SoldierNamesService.getSoldierNames(this, soldierCount)
+            .then(res => {
+                this.generateSoldiers(res);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 
-        for(let i = 1; i <= soliderCount; i++) {
-            this.soliders.push(SoldierFactoy.create(i, this.id));
+    // names generated - generate new soldiers
+    generateSoldiers(soldierNames: string[]): void {
+        if (!this.soldiers) {
+            this.soldiers = new Array<ISoldier>();
         }
 
-        this.displayAdapter.solidersCreated(this.name, this.soliders.length);
+        soldierNames.forEach((name, index) => this.soldiers.push(SoldierFactoy.create(index, this.id, name)));
+        this._displayAdapter.soldiersCreated(this.name, this.soldiers.length);
+        this.isReady = true;
     }
 }

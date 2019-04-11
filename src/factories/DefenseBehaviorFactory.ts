@@ -7,12 +7,12 @@ import { GameConfig } from "../config";
 // create new defense behavior according to chance
 export class DefenseBehaviorFactory {
     static create() {
-        if(Helper.generateChance(GameConfig.dodgeChance)){                      // dodge
+        if (Helper.generateChance(GameConfig.dodgeChance)) {                      // dodge
             return new DodgeDefenseBehavior();
-        } else if(Helper.generateChance(GameConfig.blockChance)){               // block
+        } else if (Helper.generateChance(GameConfig.blockChance)) {               // block
             return new BlockDefenseBehavior();
         } else {                                                                // normal
             return new SimpleDefenseBehavior();
         }
-    } 
+    }
 }

@@ -1,13 +1,13 @@
-import { ISolider } from "../interfaces/ISolider";
-import { IDisplayAdapter } from "../interfaces/IDisplayAdapter";
-import { DisplayControllerFactory } from "../factories/DisplayControllerFactory";
+import { GameConfig } from "../config";
 import { AttackBehaviorFactory } from "../factories/AttackBehaviorFactory";
 import { DefenseBehaviorFactory } from "../factories/DefenseBehaviorFactory";
-import { GameConfig } from "../config";
+import { DisplayControllerFactory } from "../factories/DisplayControllerFactory";
+import { IDisplayAdapter } from "../interfaces/IDisplayAdapter";
+import { ISoldier } from "../interfaces/ISoldier";
 
-export class Solider implements ISolider {
+export class Soldier implements ISoldier {
     displayAdapter: IDisplayAdapter;
-    id: number;    
+    id: number;
     name: string;
     playerId: number;
 
@@ -15,21 +15,21 @@ export class Solider implements ISolider {
     attack: number;
     defense: number;
 
-    constructor(id: number, playerId: number) {
+    constructor(id: number, playerId: number, name: string) {
         this.displayAdapter = DisplayControllerFactory.create();
 
         this.playerId = playerId;
         this.id = id;
-        this.name = `P${playerId}-S${id}`;
+        this.name = name;
 
         this.health = GameConfig.baseHealth;
         this.attack = GameConfig.baseAttack;
         this.defense = GameConfig.baseDefense;
 
-        this.displayAdapter.soldierCreated(this.name);
+        this.displayAdapter.soldierCreated(this);
     }
 
-    executeAttack(target: ISolider): number {
+    executeAttack(target: ISoldier): number {
         return AttackBehaviorFactory.create().attack(this, target);
     }
 

@@ -1,10 +1,9 @@
-import { ISoliderAttackBehavior } from "../../../interfaces/ISoliderAttackBehavior";
-import { ISolider } from "../../../interfaces/ISolider";
-import { IDisplayAdapter } from "../../../interfaces/IDisplayAdapter";
 import { DisplayControllerFactory } from "../../../factories/DisplayControllerFactory";
-import { Helper } from "../../../helper/helper";
+import { IDisplayAdapter } from "../../../interfaces/IDisplayAdapter";
+import { ISoldier } from "../../../interfaces/ISoldier";
+import { ISoldierAttackBehavior } from "../../../interfaces/ISoldierAttackBehavior";
 
-export class DeathBlowBehavior implements ISoliderAttackBehavior {
+export class DeathBlowBehavior implements ISoldierAttackBehavior {
     displayAdapter: IDisplayAdapter;
 
     constructor() {
@@ -12,9 +11,9 @@ export class DeathBlowBehavior implements ISoliderAttackBehavior {
     }
 
     // attack Behavior - death blow  *100% defender health
-    attack(attacker: ISolider, defender: ISolider) {
-        this.displayAdapter.attack(`**Death blow!!! ${attacker.name} annihilates ${defender.name}!!`);
-        
+    attack(attacker: ISoldier, defender: ISoldier) {
+        this.displayAdapter.attack(attacker, defender, "kills", defender.health);
+
         return defender.health;
     }
 }

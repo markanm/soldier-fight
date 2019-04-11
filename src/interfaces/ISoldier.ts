@@ -1,8 +1,8 @@
-import { ISoliderDefendBehavior } from "./ISoliderDefendBehavior";
+import { ISoldierDefendBehavior } from "./ISoldierDefendBehavior";
 import { IDisplayAdapter } from "./IDisplayAdapter";
 import { AttackBehaviorFactory } from "../factories/AttackBehaviorFactory";
 
-export interface ISolider {
+export interface ISoldier {
     id: number;
     name: string;
     playerId: number;
@@ -12,6 +12,6 @@ export interface ISolider {
     attack: number;
     defense: number;
 
-    executeAttack(target: ISolider): number;
+    executeAttack(target: ISoldier): number;
     executeDefend(dmg: number): void;
 }

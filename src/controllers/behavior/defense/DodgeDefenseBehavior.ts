@@ -1,24 +1,23 @@
-import { ISoliderDefendBehavior } from "../../../interfaces/ISoliderDefendBehavior";
-import { IDisplayAdapter } from "../../../interfaces/IDisplayAdapter";
 import { DisplayControllerFactory } from "../../../factories/DisplayControllerFactory";
-import { ISolider } from "../../../interfaces/ISolider";
-import { Helper } from "../../../helper/helper";
+import { IDisplayAdapter } from "../../../interfaces/IDisplayAdapter";
+import { ISoldier } from "../../../interfaces/ISoldier";
+import { ISoldierDefendBehavior } from "../../../interfaces/ISoldierDefendBehavior";
 
-export class DodgeDefenseBehavior implements ISoliderDefendBehavior {
+export class DodgeDefenseBehavior implements ISoldierDefendBehavior {
     displayAdapter: IDisplayAdapter;
 
     constructor() {
         this.displayAdapter = DisplayControllerFactory.create();
     }
 
-    defend(dmg: number, soldier: ISolider) {
+    defend(dmg: number, soldier: ISoldier) {
         // soldier dead - can't block
-        if(dmg == soldier.health) {
+        if (dmg === soldier.health) {
             return dmg;
         }
 
         // dodge - take 0 dmg
-        this.displayAdapter.defend(`**  ${soldier.name} dodges the attack and takes no damage!!`)
+        this.displayAdapter.defend(soldier, "dodges", dmg, 0);
         return 0;
     }
 }

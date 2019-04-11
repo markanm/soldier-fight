@@ -1,7 +1,7 @@
 import { IGame } from "../interfaces/IGame";
-import { GameInitializedState } from "../controllers/state/GameInitializedState";
-import { TurnExecutingState } from "../controllers/state/TurnExecutingState";
-import { GameFinishedState } from "../controllers/state/GameFinishedState";
+import { GameInitializedState } from "../controllers/state/game/GameInitializedState";
+import { TurnExecutingState } from "../controllers/state/game/TurnExecutingState";
+import { GameFinishedState } from "../controllers/state/game/GameFinishedState";
 
 // create new game states
 export class GameStateFactory {

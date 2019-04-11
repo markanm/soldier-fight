@@ -1,6 +1,15 @@
-import { GameController } from "./controllers/GameController";
+import { DOMGameController } from "./controllers/DOMGameController";
 
-let game = new GameController();
+setTimeout(function () {
+    const game = new DOMGameController();
+    game.init();
 
+    const log = document.querySelector("#log");
 
-game.run(50, 50);
+    if(log) {
+        const el = document.createElement('div');
+        el.innerHTML = "Loaded";
+        log.appendChild(el);
+    }
+}, 1000);
+
