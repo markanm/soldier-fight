@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./bundle.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
+</head>
+
+<body>
+    <div class="content">
+        <nav>
+
+        </nav>
+        <div class="flexbox">
+            <div class="flexbox__score">
+                <div class="score">
+                    <h1 class="score__title">Soldier Fight</h1>
+                    <div class="score__ver">
+                        v0.1
+                    </div>
+                    <div class="score__body">
+                        <h2>
+                            Score:
+                        </h2>
+                        <h3 class="p1_text">Player 1:</h3>
+                        <h4 id="score_p1">0</h4>
+                        <h3 class="p2_text">Player 2:</h3>
+                        <h4 id="score_p2">0</h4>
+                    </div>
+                </div>
+                <div class="control">
+                    <button id="btn_start" class="control__start">Start Game</button>
+                    <button id="btn_next" class="control__next hidden">Next</button>
+                    <button id="btn_skip_turn" class="control__skip disabled">Skip Turn</button>
+                    <button id="btn_auto" class="control__auto disabled">Auto Play</button>
+                </div>
+                <div class="settings">
+                    <h2>
+                        Settings
+                    </h2>
+                    <div class="settings__form">
+                            <label for="p1_sold">P1 soldiers:</label>
+                            <input type="number" name="p1_sold" id="p1_sold" value="10" min="1" max="500">
+                            <label for="p1_sold">P2 soldiers:</label>
+                            <input type="number" name="p2_sold" id="p2_sold" value="10" min="1" max="500">
+                    </div>
+                </div>
+            </div>
+            <div id="canvas" class="flexbox__canvas">
+                <span id="canvas__left"></span>
+                <span id="canvas__right"></span>
+                <span class="canvas_msg__wrap">
+                    <h1 id="canvas_message"> id="canvas_message"</h1>
+                </span>
+            </div>
+            <div class="flexbox__log">
+                <div id="log" class="log">
+                    <div>Loading...</div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <span>Soldier Fight 2019 BHStudio</span>
+        </footer>
+    </div>
+</body>
+
+</html>
